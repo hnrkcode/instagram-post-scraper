@@ -12,8 +12,8 @@ class Scraper(WebDriver):
     def __init__(self):
         super().__init__()
 
-    def get_urls(self, max=0):
-        """Collects urls to a users every post by default."""
+    def get_urls(self, max=1):
+        """Collects post urls."""
 
         main = self.driver.find_element_by_class_name(settings.MAIN_CONTENT)
         innerHTML = main.get_attribute("innerHTML")
@@ -22,11 +22,11 @@ class Scraper(WebDriver):
         scroll_pos = 0
         urls = set()
 
-        # Will only get post urls up til the number of max's value.
+        # Will only the latest post if not a higher number is specified.
         if max:
             total_posts = max
-        # Will scrape every post url posted by the user by default.
-        else:
+        # Will scrape every post url posted by the user.
+        if not max:
             total_posts = int(soup.find_all(class_=settings.TOTAL_POSTS)[0].text)
 
         # Scroll down.

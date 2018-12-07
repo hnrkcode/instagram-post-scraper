@@ -7,10 +7,9 @@ from downloader import Downloader
 def valid_url(url):
     pattern = "https://www.instagram.com/[a-zA-Z0-9_]+/?"
     match = re.match(pattern, url)
-    print(url, match)
     return match
 
-def main(url, max=0):
+def main(url, max=1):
     user = url
     bot = Downloader()
     bot.open(user)
@@ -22,11 +21,9 @@ def main(url, max=0):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("url", help="url to an instagram user.")
-    parser.add_argument("-l", "--limit", help="limit the number posts to download.", type=int)
+    parser.add_argument("-l", "--limit", help="limit the number posts to download. Set it to 0 to download all posts.", type=int, default=1)
     args = parser.parse_args()
 
     if valid_url(args.url):
-        if args.limit:
-            main(args.url, args.limit)
-        else:
-            main(args.url)
+        print(args.limit)
+        main(args.url, args.limit)
