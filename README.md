@@ -4,6 +4,6 @@ Download an Instagram users posts from the command line. All you have to do is c
 
 ## Built with
 
-[Python 3.6.7](https://www.python.org/)
-[Selenium 3.141.0](https://docs.seleniumhq.org/)
-[BeautifulSoup 4.6.3](https://www.crummy.com/software/BeautifulSoup/)
+- [Python 3.6.7](https://www.python.org/)
+- [Selenium 3.141.0](https://docs.seleniumhq.org/)
+- [BeautifulSoup 4.6.3](https://www.crummy.com/software/BeautifulSoup/)
