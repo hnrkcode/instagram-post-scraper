@@ -25,5 +25,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if valid_url(args.url):
-        print(args.limit)
         main(args.url, args.limit)
