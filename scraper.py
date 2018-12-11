@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.6
 
-import time
 import settings
+import random
 from webdriver import WebDriver
 from bs4 import BeautifulSoup
 
@@ -34,14 +34,15 @@ class Scraper(WebDriver):
             # Limit the number of post urls to get to what 'total_posts' is.
             for post in posts[:total_posts]:
                 url = "https://www.instagram.com" + post.parent['href']
-                urls.add(url)
+                if len(urls) < total_posts:
+                    urls.add(url)
 
             main = self.driver.find_element_by_class_name(settings.MAIN_CONTENT)
             innerHTML = main.get_attribute("innerHTML")
             soup = BeautifulSoup(innerHTML, 'html.parser')
             posts = soup.find_all(class_=settings.POST)
             self.driver.execute_script(f"window.scrollTo(0, {scroll_pos});")
-            time.sleep(1)
-            scroll_pos += 200
+            scroll_pos += 500
+            print(f"Collecting urls: {len(urls)}/{total_posts}")
 
         return urls
