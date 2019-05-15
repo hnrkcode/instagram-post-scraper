@@ -8,7 +8,7 @@ from downloader import Downloader
 
 def valid_username(username):
     if 1 <= len(username) <= 30:
-        pattern = "^[a-zA-Z0-9_][a-zA-Z0-9_.]+[a-zA-Z0-9_]$" # TODO: limit length to 30 characters and check if user exists.
+        pattern = "^[a-zA-Z0-9_][a-zA-Z0-9_.]+[a-zA-Z0-9_]$"
         match = re.match(pattern, username)
         return match
 
