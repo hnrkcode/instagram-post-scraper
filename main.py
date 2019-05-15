@@ -1,16 +1,19 @@
 #!/usr/bin/env python3.6
 
 import re
+import os
 import argparse
 from downloader import Downloader
 
-def valid_url(url):
-    pattern = "https://www.instagram.com/[a-zA-Z0-9_]+/?"
-    match = re.match(pattern, url)
-    return match
 
-def main(url, max=1):
-    user = url
+def valid_username(username):
+    if 1 <= len(username) <= 30:
+        pattern = "^[a-zA-Z0-9_][a-zA-Z0-9_.]+[a-zA-Z0-9_]$" # TODO: limit length to 30 characters and check if user exists.
+        match = re.match(pattern, username)
+        return match
+
+def main(username, max=1):
+    user = os.path.join('https://www.instagram.com/', username)
     bot = Downloader()
     bot.open(user)
     urls = bot.get_urls(max)
@@ -20,9 +23,9 @@ def main(url, max=1):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("url", help="url to an instagram user.")
+    parser.add_argument("user", help="Instagram username.")
     parser.add_argument("-l", "--limit", help="limit the number posts to download. Set it to 0 to download all posts.", type=int, default=1)
     args = parser.parse_args()
 
-    if valid_url(args.url):
-        main(args.url, args.limit)
+    if valid_username(args.user):
+        main(args.user, args.limit)
