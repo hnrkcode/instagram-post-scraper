@@ -1,10 +1,10 @@
 #!/usr/bin/env python3.6
 
 import sys
-import settings
 import random
-from webdriver import WebDriver
+from . import settings
 from bs4 import BeautifulSoup
+from .webdriver import WebDriver
 from selenium.common.exceptions import NoSuchElementException
 
 

@@ -3,7 +3,7 @@
 import re
 import os
 import argparse
-from downloader import Downloader
+from bot.downloader import Downloader
 
 
 def valid_username(username):

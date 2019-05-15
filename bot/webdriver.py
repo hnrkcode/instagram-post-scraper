@@ -17,7 +17,7 @@ class WebDriver:
         try:
             self.driver = webdriver.Firefox(
                 firefox_options=options,
-                executable_path=os.path.join(os.path.dirname(__file__), 'geckodriver')
+                executable_path=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'geckodriver')
             )
         except exceptions.WebDriverException as e:
             sys.exit(e)

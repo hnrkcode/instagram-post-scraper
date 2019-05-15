@@ -3,9 +3,9 @@
 import re
 import os
 import urllib
-import settings
+from . import settings
 from urllib import request
-from scraper import Scraper
+from .scraper import Scraper
 from bs4 import BeautifulSoup
 from selenium.common import exceptions
 
