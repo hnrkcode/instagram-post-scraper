@@ -1,5 +1,7 @@
 #!/usr/bin/env python3.6
 
+import sys
+import os.path
 from selenium import webdriver
 from selenium.common import exceptions
 from selenium.webdriver.firefox.options import Options
@@ -12,7 +14,13 @@ class WebDriver:
         """Initialize headless mode by default."""
         options = Options()
         options.add_argument("--headless")
-        self.driver = webdriver.Firefox(firefox_options=options)
+        try:
+            self.driver = webdriver.Firefox(
+                firefox_options=options,
+                executable_path=os.path.join(os.path.dirname(__file__), 'geckodriver')
+            )
+        except exceptions.WebDriverException as e:
+            sys.exit(e)
 
     def open(self, url):
         """Open the url in the webdriver."""
