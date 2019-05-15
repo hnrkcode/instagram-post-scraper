@@ -14,10 +14,21 @@ class Scraper(WebDriver):
     def __init__(self):
         super().__init__()
 
-    def _user_exists(self):
-        """Check if the user exists"""
+    def _is_private(self, main):
+        """Check if the account is private."""
         try:
-            main = self.driver.find_element_by_class_name(settings.MAIN_CONTENT)
+            innerHTML = main.get_attribute("innerHTML")
+            soup = BeautifulSoup(innerHTML, 'html.parser')
+            private = soup.find('h2').string
+        except AttributeError:
+            return main  # The account is public.
+        else:
+            sys.exit(private)
+
+    def _user_exists(self):
+        """Check if the user exists."""
+        try:
+            main = self._is_private(self.driver.find_element_by_class_name(settings.MAIN_CONTENT))
         except NoSuchElementException:
             main = self.driver.find_element_by_class_name(settings.NOT_AVAILABLE)
             innerHTML = main.get_attribute("innerHTML")

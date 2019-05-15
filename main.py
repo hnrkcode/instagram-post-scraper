@@ -23,9 +23,9 @@ def main(username, max=1):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("user", help="Instagram username.")
+    parser.add_argument("username", help="Instagram username.")
     parser.add_argument("-l", "--limit", help="limit the number posts to download. Set it to 0 to download all posts.", type=int, default=1)
     args = parser.parse_args()
 
-    if valid_username(args.user):
-        main(args.user, args.limit)
+    if valid_username(args.username):
+        main(args.username, args.limit)
