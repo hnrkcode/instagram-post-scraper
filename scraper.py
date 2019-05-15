@@ -1,9 +1,11 @@
 #!/usr/bin/env python3.6
 
+import sys
 import settings
 import random
 from webdriver import WebDriver
 from bs4 import BeautifulSoup
+from selenium.common.exceptions import NoSuchElementException
 
 
 class Scraper(WebDriver):
@@ -12,10 +14,23 @@ class Scraper(WebDriver):
     def __init__(self):
         super().__init__()
 
+    def _user_exists(self):
+        """Check if the user exists"""
+        try:
+            main = self.driver.find_element_by_class_name(settings.MAIN_CONTENT)
+        except NoSuchElementException:
+            main = self.driver.find_element_by_class_name(settings.NOT_AVAILABLE)
+            innerHTML = main.get_attribute("innerHTML")
+            soup = BeautifulSoup(innerHTML, 'html.parser')
+            message = soup.find('h2').string
+            sys.exit(message)
+        else:
+            return main
+
     def get_urls(self, max=1):
         """Collects post urls."""
 
-        main = self.driver.find_element_by_class_name(settings.MAIN_CONTENT)
+        main = self._user_exists()
         innerHTML = main.get_attribute("innerHTML")
         soup = BeautifulSoup(innerHTML, 'html.parser')
         posts = soup.find_all(class_=settings.POST)

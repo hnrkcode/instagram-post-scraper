@@ -6,6 +6,7 @@
 POST = "eLAPa"
 TOTAL_POSTS = "g47SY "
 MAIN_CONTENT = "v9tJq "
+NOT_AVAILABLE = "error-container"
 
 # Constants for the Downloader class.
 IMG_POST = "FFVAD"
